@@ -2,6 +2,7 @@ package com.example.pfe_0220;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
@@ -10,5 +11,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ShowMessage();
+    }
+
+    private void ShowMessage() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("project synced and ready to be devloppment");
+        builder.setTitle("hint from ibrahim");
+        builder.create().show();
     }
 }
