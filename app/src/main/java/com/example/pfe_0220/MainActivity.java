@@ -16,8 +16,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void ShowMessage() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("project synced and ready to be devloppment");
-        builder.setTitle("hint from ibrahim");
+        builder.setMessage("update succeed");
+        builder.setTitle("hint from ibrahim ");
         builder.create().show();
     }
 }
