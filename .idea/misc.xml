@@ -5,15 +5,20 @@
       <map>
         <entry key="..\:/Projects/android_studio/PFE_0220/app/src/main/res/drawable/app__logo.xml" value="0.2985" />
         <entry key="..\:/Projects/android_studio/PFE_0220/app/src/main/res/layout/activity_main.xml" value="0.3489583333333333" />
+        <entry key="..\:/Projects/android_studio/PFE_0220/app/src/main/res/layout/activity_welcome.xml" value="0.3489583333333333" />
+        <entry key="..\:/Projects/android_studio/PFE_0220/app/src/main/res/layout/dialog_bar_code_scanner.xml" value="0.34791666666666665" />
         <entry key="..\:/Projects/android_studio/PFE_0220/app/src/main/res/layout/fragment_departement.xml" value="0.3489583333333333" />
         <entry key="..\:/Projects/android_studio/PFE_0220/app/src/main/res/layout/fragment_planning.xml" value="0.3489583333333333" />
         <entry key="..\:/Projects/android_studio/PFE_0220/app/src/main/res/layout/fragment_profile.xml" value="0.3489583333333333" />
         <entry key="..\:/Projects/android_studio/PFE_0220/app/src/main/res/layout/fragment_school_class.xml" value="0.3489583333333333" />
+        <entry key="..\:/Projects/android_studio/PFE_0220/app/src/main/res/layout/fragment_school_class_attendence.xml" value="0.3489583333333333" />
+        <entry key="..\:/Projects/android_studio/PFE_0220/app/src/main/res/layout/fragment_school_class_person_holder.xml" value="0.34791666666666665" />
         <entry key="..\:/Projects/android_studio/PFE_0220/app/src/main/res/layout/fragment_students.xml" value="0.3489583333333333" />
         <entry key="..\:/Projects/android_studio/PFE_0220/app/src/main/res/layout/fragment_teachers.xml" value="0.3489583333333333" />
         <entry key="..\:/Projects/android_studio/PFE_0220/app/src/main/res/layout/nav_header.xml" value="0.3489583333333333" />
         <entry key="..\:/Projects/android_studio/PFE_0220/app/src/main/res/layout/node_day.xml" value="0.34791666666666665" />
         <entry key="..\:/Projects/android_studio/PFE_0220/app/src/main/res/layout/node_scholl_class.xml" value="0.34791666666666665" />
+        <entry key="..\:/Projects/android_studio/PFE_0220/app/src/main/res/layout/node_student_attendence.xml" value="0.34791666666666665" />
         <entry key="..\:/Projects/android_studio/PFE_0220/app/src/main/res/menu/manager_menu.xml" value="0.3489583333333333" />
       </map>
     </option>

@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     } // end of activity
 
-    private void InitialiseActivity() {
+    public void InitialiseActivity() {
         ShowFragment(new PlanningFragment(),"Planning");
         navigationView.setCheckedItem(R.id.planinng);
     }
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
     }
 
-    private void ShowFragment(Fragment fragment,String fragment_name) {
+    public void ShowFragment(Fragment fragment,String fragment_name) {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
         toolbar.setTitle(fragment_name);
         drawer.closeDrawer(GravityCompat.START);
