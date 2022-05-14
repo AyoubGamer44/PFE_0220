@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <com.budiyev.android.codescanner.CodeScannerView
+    android:layout_centerInParent="true"
+        android:layout_above="@+id/info_section"
         android:id="@+id/scanner_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,6 +24,49 @@
         app:frameThickness="2dp"
         app:maskColor="#77000000"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/info_section"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonsHolder"
+        android:background="@color/teal_200">
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/scanning_message"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
 
+            android:text="Scanning . . . "/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <include layout="@layout/node_student_attendence"
+            android:id="@+id/student_node"
+          android:visibility="gone"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/buttonsHolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="0dp"
+            android:id="@+id/cancel_btn"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="5dp"
+            android:text="Cancel" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:layout_weight="1"
+            android:text="Save" />
+
+    </LinearLayout>
+
+</RelativeLayout>

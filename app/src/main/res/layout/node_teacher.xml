@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:orientation="horizontal">
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/teacherName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="teacher name" />
+
+        <TextView
+            android:id="@+id/teacherAdress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="adress" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/teacherMail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="emailAdress@fakeAdress.com" />
+
+        <TextView
+         android:id="@+id/teacherPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="07 78 54 12 23" />
+    </LinearLayout>
+
+
+</LinearLayout>

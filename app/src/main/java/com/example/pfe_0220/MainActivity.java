@@ -119,4 +119,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbar.setTitle(fragment_name);
         drawer.closeDrawer(GravityCompat.START);
     }
+
+
+    @Override
+    public void onBackPressed() {
+
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            super.onBackPressed();
+            //additional code
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
+
+    }
+
+
 }

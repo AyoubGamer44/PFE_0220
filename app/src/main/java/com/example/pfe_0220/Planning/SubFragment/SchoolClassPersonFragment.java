@@ -2,11 +2,9 @@ package com.example.pfe_0220.Planning.SubFragment;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,12 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.budiyev.android.codescanner.CodeScanner;
-import com.budiyev.android.codescanner.CodeScannerView;
-import com.budiyev.android.codescanner.DecodeCallback;
 import com.example.pfe_0220.Planning.Adapter.StudentAttendencesNodeAdapter;
 import com.example.pfe_0220.R;
-import com.google.zxing.Result;
 
 public class SchoolClassPersonFragment extends Fragment {
 
@@ -32,7 +26,7 @@ public class SchoolClassPersonFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       return inflater.inflate(R.layout.fragment_school_class_person_holder,container,false);
+        return inflater.inflate(R.layout.fragment_school_class_person_holder, container, false);
     }
 
     @Override
@@ -40,20 +34,15 @@ public class SchoolClassPersonFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-
-
-
-
         student_attendences_holder = view.findViewById(R.id.student_attendences_holder);
 
         studentAttendencesNodeAdapter = new StudentAttendencesNodeAdapter();
-        mlayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        mlayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         student_attendences_holder.setLayoutManager(mlayoutManager);
         student_attendences_holder.setAdapter(studentAttendencesNodeAdapter);
         Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.dialog_bar_code_scanner);
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
-
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
 
 //       CodeScanner mCodeScanner;
