@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/planinng"
+            android:icon="@drawable/icon_planing"
+            android:title="@string/planning" />
+        <item
+            android:id="@+id/student"
+            android:icon="@drawable/icon_student"
+            android:title="@string/students" />
+        <item
+            android:id="@+id/teachers"
+            android:icon="@drawable/icon_teacher"
+            android:title="@string/teachers" />
+        <item
+            android:id="@+id/departement"
+            android:icon="@drawable/ic_departement"
+            android:title="@string/Departements" />
+
+        <item
+            android:id="@+id/profile"
+            android:icon="@drawable/ic_profile"
+            android:title="@string/Profile" />
+
+    </group>
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/add_planing"
+                android:icon="@drawable/ic_new_planing"
+                android:title="@string/add_planning" />
+
+            <item
+                android:id="@+id/logout"
+                android:icon="@drawable/ic_signout"
+                android:title="@string/logout" />
+
+        </menu>
+    </item>
+</menu>
