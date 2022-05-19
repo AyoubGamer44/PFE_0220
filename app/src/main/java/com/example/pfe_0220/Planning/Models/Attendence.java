@@ -15,7 +15,7 @@ public class Attendence {
     public static int TEACHER = 1;
 
     @Ignore
-    public static int ABSENT = 2;
+    public static int ABSENT = 3;
 
     @Ignore
     public static int PRESENT = 1;
@@ -23,7 +23,7 @@ public class Attendence {
     @Ignore
     public static int PENDING = 0;
     @Ignore
-    public static int LATE = 3;
+    public static int LATE = 2;
 
 
     public static  String[] shortpresenceType  = {".","P","A","L"};
@@ -85,4 +85,19 @@ public class Attendence {
     public void setState(int state) {
         this.state = state;
     }
+
+
+
+    public static int getNextAttendence(int attendenceOrder){
+        switch (attendenceOrder){
+            case 0:  return PRESENT;
+            case 1: return LATE;
+            case 2: return ABSENT;
+            case 3: return PENDING;
+
+
+        }
+        return 1;
+    }
+
 }

@@ -95,7 +95,6 @@ departementViewModel.departementRepository.savedModules.observe(getViewLifecycle
 
     @Override
     public void onClick(View view, int position) {
-        Toast.makeText(getContext(), "show info about the selected modules", Toast.LENGTH_SHORT).show();
     }
 
 

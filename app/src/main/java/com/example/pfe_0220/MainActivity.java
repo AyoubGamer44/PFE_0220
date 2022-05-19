@@ -103,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void Logout() {
-        Toast.makeText(this, "logout", Toast.LENGTH_SHORT).show();
         drawer.closeDrawer(GravityCompat.START);
         //launch the welcome activity
         Intent intent = new Intent(this,WelcomeActivity.class);

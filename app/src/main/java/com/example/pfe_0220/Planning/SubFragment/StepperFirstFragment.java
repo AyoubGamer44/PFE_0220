@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -133,6 +134,7 @@ public class StepperFirstFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 planningViewModel.newSchoolClass.setModule_id(modules_drop_down_list_adapter.getItem(position).id);
+
             }
         });
 

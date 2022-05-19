@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
@@ -25,6 +26,7 @@ import com.budiyev.android.codescanner.ScanMode;
 import com.example.pfe_0220.Departement.DepartementRepository;
 import com.example.pfe_0220.Planning.Adapter.PersonPagerAdapter;
 import com.example.pfe_0220.Planning.Models.Attendence;
+import com.example.pfe_0220.Planning.Models.AttendenceNode;
 import com.example.pfe_0220.Planning.Models.SchoolClassNode;
 import com.example.pfe_0220.Planning.PlanningViewModel;
 import com.example.pfe_0220.Planning.ViewModels.SchoolClassesViewModel;
@@ -37,6 +39,7 @@ import com.google.zxing.Result;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
+import java.util.List;
 
 
 enum ScanState {
@@ -63,7 +66,7 @@ public class SchoolClassAttendenceFragment extends Fragment {
 
     TextView moduleName, speciaityName, departementName, eventType, timing, level, group;
 
-
+    int attendence_id;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -120,6 +123,8 @@ public class SchoolClassAttendenceFragment extends Fragment {
 
         personSelectorTab.setupWithViewPager(personPager);
         personSelectorTab.getTabAt(0).setText("students");
+        personSelectorTab.getTabAt(0).setIcon(R.drawable.icon_student);
+        personSelectorTab.getTabAt(1).setIcon(R.drawable.icon_teacher);
         personSelectorTab.getTabAt(1).setText("responsibles");
 
 
@@ -150,7 +155,7 @@ public class SchoolClassAttendenceFragment extends Fragment {
         codeScanner.setCamera(CodeScanner.CAMERA_BACK);
         codeScanner.setFormats(CodeScanner.ALL_FORMATS);
         codeScanner.setAutoFocusMode(AutoFocusMode.SAFE);
-        codeScanner.setScanMode(ScanMode.CONTINUOUS);
+        codeScanner.setScanMode(ScanMode.SINGLE);
         codeScanner.setAutoFocusEnabled(true);
         codeScanner.setFlashEnabled(false);
         codeScanner.startPreview();
@@ -166,12 +171,19 @@ public class SchoolClassAttendenceFragment extends Fragment {
                     public void run() {
 
                         int scanned_id = Integer.parseInt(result.getText());
+
                         try {
-                            Attendence attendence = schoolClassesViewModel.getAttendenceOf(scanned_id);
+                            schoolClassesViewModel.schoolClassRepository.studentsAttendence.observe(getViewLifecycleOwner(), new Observer<List<AttendenceNode>>() {
+                                @Override
+                                public void onChanged(List<AttendenceNode> attendenceNodes) {
+                                    attendence_id =AttendenceNode.getAttendenceof(scanned_id, (ArrayList<AttendenceNode>) attendenceNodes);
+                                }
+                            });
+                            Attendence attendence = schoolClassesViewModel.getAttendenceOf(attendence_id);
                             Student scannedStudent = planningViewModel.studentRepository.getStudentwithId(scanned_id);
                             ToggleScanState(ScanState.student,scannedStudent);
                             Toast.makeText(getContext(), scannedStudent.firstName + " " + scannedStudent.lastName, Toast.LENGTH_SHORT).show();
-                            attendence.state = Attendence.PRESENT;
+                            attendence.state = Attendence.getNextAttendence(attendence.state);
 
                             schoolClassesViewModel.UpdateStudentAttendence(attendence);
                         } catch (Exception e) {

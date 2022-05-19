@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pfe_0220.Departement.DepartementRepository;
 import com.example.pfe_0220.Departement.DepartementViewModel;
 import com.example.pfe_0220.Departement.Models.Departement;
 import com.example.pfe_0220.Departement.Models.Speciality;
@@ -44,6 +46,8 @@ public class StudentFragment extends Fragment implements StudentListHolderAdapte
     //Data variables
     StudentViewModel studentViewModel;
 
+
+    TextView departementTV,SpecialityTV,LevelTV,SecionTV,groupTV;
 
     @Nullable
     @Override
@@ -102,6 +106,7 @@ public class StudentFragment extends Fragment implements StudentListHolderAdapte
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
 //upload specialities of that departement
                 departementViewModel.departementRepository.savedSpecialities.observe(getViewLifecycleOwner(), new Observer<List<Speciality>>() {
                     @Override
@@ -122,6 +127,8 @@ public class StudentFragment extends Fragment implements StudentListHolderAdapte
                 int selected_speciality_id = position + 1;
 
                 filterDialog.selected_speciality = selected_speciality_id;
+
+
             }
         });
 
@@ -151,16 +158,17 @@ public class StudentFragment extends Fragment implements StudentListHolderAdapte
                             filterDialog.selected_group = filterDialog.groupPicker.getValue();
                             filterDialog.selected_section = filterDialog.sectionPicker.getValue();
 
-                            new AlertDialog.Builder(getContext()).
 
-                                    setMessage("dep" + filterDialog.selected_departement + "spec " + filterDialog.selected_speciality + " level" + filterDialog.selected_level + "section " + filterDialog.selected_section + "group " + filterDialog.selected_group).
-                                    create().
-                                    show();
                             studentListHolderAdapter.UpdateStudentList((ArrayList<Student>) students);
+
                         }
                     });
 
-
+                    LevelTV.setText(DepartementRepository.getAvailableLevels().get(filterDialog.selected_level));
+                    SecionTV.setText("Section N : "+filterDialog.selected_section);
+                    groupTV.setText("Group N : "+filterDialog.selected_group);
+                    departementTV.setText( filterDialog.departement_drop_down_list_adapter.getItem(filterDialog.selected_departement).name);
+                    SpecialityTV.setText( filterDialog.specialities_drop_down_list_adapter.getItem(filterDialog.selected_speciality).name);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -177,11 +185,23 @@ public class StudentFragment extends Fragment implements StudentListHolderAdapte
             }
         });
 
+        LinkViews(view);
 
+    }
+
+
+
+    public void LinkViews(View v){
+        departementTV = v.findViewById(R.id.departement);
+                SpecialityTV= v.findViewById(R.id.speciality_name);
+        LevelTV= v.findViewById(R.id.level);
+                SecionTV= v.findViewById(R.id.section);
+        groupTV= v.findViewById(R.id.group);
     }
 
     @Override
     public void onClick(View view, int position) {
+        studentViewModel.selectedStudent_id = studentListHolderAdapter.students.get(position).id;
         ((MainActivity) getActivity()).ShowFragment(new StudentDetailsFragment(), "student list");
     }
 }

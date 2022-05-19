@@ -38,7 +38,7 @@ public class DepartementListAdapter extends RecyclerView.Adapter<DepartementList
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_departement_node, parent, false);
+                .inflate(R.layout.node_departement, parent, false);
 
         return new DepartementListAdapter.ViewHolder(view);
     }

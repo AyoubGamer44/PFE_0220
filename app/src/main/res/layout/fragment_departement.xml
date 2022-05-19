@@ -15,7 +15,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/fragment_departement_node" />
+        tools:listitem="@layout/node_departement" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

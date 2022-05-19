@@ -11,6 +11,8 @@ import com.example.pfe_0220.Planning.Models.Attendence;
 import com.example.pfe_0220.Planning.Models.AttendenceNode;
 import com.example.pfe_0220.Planning.Models.SchoolClass;
 import com.example.pfe_0220.Planning.Models.SchoolClassNode;
+import com.example.pfe_0220.Student.Model.AttendenceReportNode;
+import com.example.pfe_0220.Student.Model.ModuleReportNode;
 
 import java.util.List;
 
@@ -29,6 +31,7 @@ public interface PlanningDao {
     @Insert
     void InsertAttendence(Attendence attendence);
 
+    @Transaction
     @Update
     void UpdateAttendence(Attendence attendence);
 
@@ -42,6 +45,17 @@ public interface PlanningDao {
     @Query("select MAX(id) from schoolclass")
     int getLastInsertedIdfrom();
 
-    @Query("select * from attendence where student_id = :student_id ")
-    Attendence getAttendenceOf(int student_id);
+    @Query("select * from attendence where id = :id ")
+    Attendence getAttendenceOf(int id);
+
+    @Query("select distinct m.name as moduleName,m.id as moduleId  from module m , attendence a where a.module_id = m.id and a.student_id =:student_id ")
+    List<ModuleReportNode> getModulesOfStudentwithid(int student_id);
+
+    @Transaction
+    @Query("select   sc.school_classtype as school_classtype  ,(select count(*) from attendence at where a.student_id  = :student and at.id = a.id and state = 1 and at.module_id = :module) as presenceCount " +
+            ",(select count(*) from attendence att where a.student_id  = :student  and att.id = a.id and state = 2 and att.module_id =:module) as absenceCount , sc.start_time , sc.end_time " +
+            "from schoolclass sc , attendence a ,module m where m.id = sc.module_id and a.student_id = :student  and a.schoolClass_id = sc.id and a.module_id = :module ")
+    List<AttendenceReportNode> getReportsOf(int student, int module);
+
+
 }

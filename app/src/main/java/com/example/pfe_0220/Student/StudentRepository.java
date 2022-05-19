@@ -7,7 +7,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.pfe_0220.DatabaseFiles.ApplicationDatabase;
+import com.example.pfe_0220.DatabaseFiles.PlanningDao;
 import com.example.pfe_0220.DatabaseFiles.StudentDao;
+import com.example.pfe_0220.Student.Model.AttendenceReportNode;
+import com.example.pfe_0220.Student.Model.ModuleReportNode;
 import com.example.pfe_0220.Student.Model.Student;
 
 import java.util.ArrayList;
@@ -16,16 +19,21 @@ import java.util.List;
 public class StudentRepository {
 
     StudentDao studentDao;
+    PlanningDao planningDao;
 
     public LiveData<List<Student>> foundStudent;
     public LiveData<List<Student>> allStudent;
 
-
+    public MutableLiveData<ArrayList<ModuleReportNode>> selected_student_report ;
     public StudentRepository(Application application) {
         ApplicationDatabase data = ApplicationDatabase.getInstance(application);
         studentDao = data.studentDao();
+        planningDao = data.planningDao();
     }
 
+    public void getReportsof(int student_id) throws Exception{
+        selected_student_report = new  getReportsOfStudent(planningDao).execute(student_id).get();
+    }
 
 public void getAllStudent() throws Exception{
 allStudent = new GetAllStudent(studentDao).execute().get();
@@ -126,5 +134,31 @@ return new GetStudent_BY_ID(studentDao).execute(id).get();
             return    dao.getStudentwithId(integers[0]);
         }
     }
+
+
+    class getReportsOfStudent extends AsyncTask<Integer,Void, MutableLiveData<ArrayList<ModuleReportNode>>>{
+        public getReportsOfStudent(PlanningDao dao) {
+            this.dao = dao;
+        }
+
+        PlanningDao dao;
+        @Override
+        protected MutableLiveData<ArrayList<ModuleReportNode>> doInBackground(Integer... ids) {
+            List<ModuleReportNode> modules ;
+           modules = dao.getModulesOfStudentwithid(ids[0]);
+
+
+            for (ModuleReportNode node: modules
+            ) {
+               node.attendenceReportNodes = dao.getReportsOf(ids[0],node.moduleId);
+            }
+
+            MutableLiveData<ArrayList<ModuleReportNode>> reports = new MutableLiveData<>();
+            reports.postValue((ArrayList<ModuleReportNode>) modules);
+            return reports;
+        }
+    }
+
+
 
 }

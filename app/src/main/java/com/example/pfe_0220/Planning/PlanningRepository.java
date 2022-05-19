@@ -112,6 +112,7 @@ public class PlanningRepository {
                 attendence.presenceType = Attendence.TEACHER;
                 attendence.state = Attendence.PENDING;
                 attendence.enterTime = Calendar.getInstance();
+                attendence.module_id = schoolClass.module_id;
                 attendences.add(attendence);
             }
 
@@ -123,6 +124,7 @@ public class PlanningRepository {
                 attendence.student_id = s.id;
                 attendence.presenceType = Attendence.STUDENT;
                 attendence.state = Attendence.PENDING;
+                attendence.module_id = schoolClass.module_id;
                 attendence.enterTime = Calendar.getInstance();
                 attendences.add(attendence);
             }

@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
 
 
 
-        android:id="@+id/speciality_name"
-        android:layout_width="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:background="@drawable/border"
+
+android:layout_margin="5dp"
+
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Speciality Name"
-        android:layout_margin="@dimen/text_margin">
 
+      >
 
-</TextView>
+<TextView
+    android:layout_width="match_parent"
+    style="@style/MainTextStyle"
+    android:layout_height="wrap_content"
+    android:id="@+id/speciality_name"
+    android:layout_margin="@dimen/text_margin"
+    android:text="speciality"/>
+</LinearLayout>

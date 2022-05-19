@@ -5,53 +5,82 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/school_class_info"
         android:layout_width="match_parent"
+        android:elevation="4dp"
         android:layout_height="wrap_content"
+        android:background="@color/light_brown"
+        android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent"
 
-      >
+        >
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+            android:layout_marginHorizontal="5dp"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/departement"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Module Name" />
+                android:layout_marginVertical="5dp"
+                android:textAlignment="textStart"
+                android:drawableStart="@drawable/ic_departement"
+                android:drawablePadding="5dp"
+
+                android:text="Module Name"
+                android:textStyle="bold" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/speciality_name"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Speciality" />
+                android:layout_marginVertical="5dp"
+                android:textAlignment="textStart"
+                android:drawableStart="@drawable/ic_speciality"
+                android:drawablePadding="5dp"
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="departement" />
+                android:text="speciality" />
         </LinearLayout>
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+           android:layout_gravity="center"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:layout_weight=".8"
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/level"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Event Type" />
+                android:text="Event Type"
+                android:textAlignment="center"
+                android:textStyle="bold" />
 
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/section"
+
+                android:layout_width="match_parent"
+                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:text="08 : 00 - 10 : 00" />
+
+
+            <TextView
+                android:id="@+id/group"
+                android:layout_width="match_parent"
+                android:textAlignment="center"
                 android:layout_height="wrap_content"
                 android:text="08 : 00 - 10 : 00" />
         </LinearLayout>
@@ -59,12 +88,13 @@
 
         <Button
             android:id="@+id/group_filter_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
+
+            android:layout_margin="10dp"
+            android:layout_weight="1"
             android:text="groupe" />
-    </RelativeLayout>
+    </LinearLayout>
 
 <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/student_list_holder"

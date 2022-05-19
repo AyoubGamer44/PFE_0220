@@ -16,7 +16,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pfe_0220.MainActivity;
 import com.example.pfe_0220.Planning.Adapter.TeacherCheckBoxListAdapter;
+import com.example.pfe_0220.Planning.PlanningFragment;
 import com.example.pfe_0220.Planning.PlanningViewModel;
 import com.example.pfe_0220.Planning.ViewModels.SchoolClassesViewModel;
 import com.example.pfe_0220.R;
@@ -132,6 +134,7 @@ public class StepperFourthFragment extends Fragment implements TeacherCheckBoxLi
 
 
                     planningViewModel.PlaneNewSchoolClass(planningViewModel.newSchoolClass, teacherCheckBoxListAdapter.selected_teachers);
+                    ((MainActivity)getActivity()).ShowFragment(new PlanningFragment(),"planning fragment");
 
 
                 }

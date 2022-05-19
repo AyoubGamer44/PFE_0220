@@ -132,7 +132,6 @@ departementViewModel.departementRepository.savedDepartements.observe(getViewLife
             departementViewModel.departementRepository.getSpecialitiesOf( departementListAdapter.departements.get(position).id);
             ((MainActivity) getActivity()).ShowFragment(new SpecialitiesFragment(), "Speciality list");
         } catch (Exception e) {
-            Toast.makeText(getContext(), "no speciality to show", Toast.LENGTH_SHORT).show();
         }
 
     }

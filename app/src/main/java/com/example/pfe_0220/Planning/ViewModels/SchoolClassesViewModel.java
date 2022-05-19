@@ -37,8 +37,8 @@ public class SchoolClassesViewModel extends AndroidViewModel {
         schoolClassRepository.InsertAttendenceFor(attendence);
     }
 
-public Attendence getAttendenceOf(int studentId) throws Exception{
-        return schoolClassRepository.GetAttendenceOf(studentId);
+public Attendence getAttendenceOf(int id) throws Exception{
+        return schoolClassRepository.GetAttendenceOf(id);
 }
     public void UpdateStudentAttendence(Attendence attendence){
         schoolClassRepository.UpdateStudentAttendence(attendence);

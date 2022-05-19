@@ -3,9 +3,10 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
+    android:layout_marginTop="?attr/actionBarSize"
     android:gravity="bottom"
-    android:padding="16dp"
+
+    android:padding="6dp"
 
     >
 <ImageView
@@ -15,14 +16,17 @@
     android:src="@drawable/application_logo"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Manager Name"
+android:textStyle="bold"
+        android:textSize="20sp"
+        android:paddingVertical="@dimen/medim_text"
         android:paddingTop="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Manager"/>
 

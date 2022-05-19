@@ -16,8 +16,17 @@ import java.util.ArrayList;
 
 public class StudentAttendencesNodeAdapter extends RecyclerView.Adapter<StudentAttendencesNodeAdapter.ViewHolder> {
 
-    ArrayList<AttendenceNode> studentAttendences = new ArrayList<>();
+   public ArrayList<AttendenceNode> studentAttendences = new ArrayList<>();
 
+    public interface ItemClickListener {
+        public void onClick(View view, int position);
+    }
+
+    private SchoolClassesAdapter.ItemClickListener clickListener;
+
+    public void setClickListener(SchoolClassesAdapter.ItemClickListener itemClickListener) {
+        this.clickListener = itemClickListener;
+    }
 
     public void UpdateList(ArrayList<AttendenceNode> attendenceNodes) {
         studentAttendences = attendenceNodes;
@@ -43,7 +52,7 @@ public class StudentAttendencesNodeAdapter extends RecyclerView.Adapter<StudentA
         return studentAttendences.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView studentName, studentId, enterTime, presenceState;
 
         public ViewHolder(@NonNull View itemView) {
@@ -52,7 +61,7 @@ public class StudentAttendencesNodeAdapter extends RecyclerView.Adapter<StudentA
             studentId = itemView.findViewById(R.id.studentId);
             enterTime = itemView.findViewById(R.id.enter_time);
             presenceState = itemView.findViewById(R.id.presence_state);
-
+            itemView.setOnClickListener(this);
 
         }
 
@@ -63,5 +72,9 @@ public class StudentAttendencesNodeAdapter extends RecyclerView.Adapter<StudentA
             presenceState.setText(Attendence.shortpresenceType[node.state]);
         }
 
+        @Override
+        public void onClick(View v) {
+            if (clickListener != null) clickListener.onClick(v, getAdapterPosition());
+        }
     }
 }

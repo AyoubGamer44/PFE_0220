@@ -12,12 +12,14 @@
         android:id="@+id/school_class_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+android:background="@color/light_brown"
+        android:elevation="3dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/medim_text_margin"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:orientation="vertical">
@@ -25,6 +27,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:id="@+id/module_name"
+               android:textStyle="bold"
+
                 android:layout_height="wrap_content"
                 android:text="Module Name" />
 
@@ -50,8 +54,10 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:id="@+id/event_type"
+                android:textAlignment="center"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:text="Event Type" />
 
@@ -59,6 +65,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:id="@+id/timing"
                 android:text="08 : 00 - 10 : 00" />
         </LinearLayout>
@@ -73,6 +80,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
+                android:textStyle="bold"
                 android:id="@+id/level"
                 android:layout_height="wrap_content"
                 android:text="Master 01" />
@@ -95,6 +103,7 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/personSelectorTab"
+        android:elevation="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
       app:layout_constraintBottom_toTopOf="@+id/personPager"
@@ -118,7 +127,7 @@
         android:id="@+id/planifer_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/purple_200"
+        android:background="@color/light_brown"
         android:padding="2dp"
         android:text="planified by : Manager name"
         android:textAlignment="center"
@@ -133,6 +142,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+
         android:src="@drawable/ic_scan"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

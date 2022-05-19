@@ -19,7 +19,7 @@ public class StudentViewModel extends AndroidViewModel {
 
    public Student newStudent;
 
-
+public int selectedStudent_id;
 
 
 
@@ -44,5 +44,7 @@ public class StudentViewModel extends AndroidViewModel {
         studentRepository.InsertStudent(student);
     }
 
-
+public void getReportOfStudent()throws Exception{
+        studentRepository.getReportsof(selectedStudent_id);
+}
 }

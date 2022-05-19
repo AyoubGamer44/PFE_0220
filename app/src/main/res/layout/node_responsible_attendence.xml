@@ -2,28 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@drawable/border"
     android:padding="10dp">
 
     <TextView
+        android:id="@+id/teacher_name"
+        style="@style/student_attendence"
         android:layout_width="0dp"
 
-        style="@style/student_attendence"
+       
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="teacher name" />
-
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        style="@style/student_attendence"
-        android:text="speciality" />
+        android:text="teacher name"
+        android:textSize="@dimen/text_big"
+        android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/phone_number"
+        style="@style/student_attendence"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        style="@style/student_attendence"
         android:text="07 79 56 74 87" />
 
 </LinearLayout>

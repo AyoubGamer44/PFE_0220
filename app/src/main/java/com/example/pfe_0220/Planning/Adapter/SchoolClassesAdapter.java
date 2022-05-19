@@ -9,16 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pfe_0220.Departement.DepartementRepository;
-import com.example.pfe_0220.Planning.Models.SchoolClass;
 import com.example.pfe_0220.Planning.Models.SchoolClassNode;
 import com.example.pfe_0220.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SchoolClassesAdapter extends RecyclerView.Adapter<SchoolClassesAdapter.ViewHolder> {
 
-   public ArrayList<SchoolClassNode> classes = new ArrayList<>();
+    public ArrayList<SchoolClassNode> classes = new ArrayList<>();
     private ItemClickListener clickListener;
 
     @NonNull
@@ -37,7 +35,7 @@ public class SchoolClassesAdapter extends RecyclerView.Adapter<SchoolClassesAdap
 
     @Override
     public void onBindViewHolder(@NonNull SchoolClassesAdapter.ViewHolder holder, int position) {
-holder.SetUpNode(classes.get(position));
+        holder.SetUpNode(classes.get(position));
     }
 
     @Override
@@ -51,19 +49,20 @@ holder.SetUpNode(classes.get(position));
 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView startTime,EndTime,moduleName,specialityName,departementName,levelName,sectionName,groupName,schoolTypeName;
+        TextView startTime, EndTime, moduleName, specialityName, departementName, levelName, sectionName, groupName, schoolTypeName;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
 
             startTime = itemView.findViewById(R.id.start_time);
-                    EndTime = itemView.findViewById(R.id.end_time);
+            EndTime = itemView.findViewById(R.id.end_time);
             moduleName = itemView.findViewById(R.id.module_name);
-                    specialityName = itemView.findViewById(R.id.speciality_name);
+            specialityName = itemView.findViewById(R.id.speciality_name);
             departementName = itemView.findViewById(R.id.departement_name);
-                    levelName = itemView.findViewById(R.id.level_name);
+            levelName = itemView.findViewById(R.id.level_name);
             sectionName = itemView.findViewById(R.id.section_name);
-                    groupName = itemView.findViewById(R.id.group_name);
+            groupName = itemView.findViewById(R.id.group_name);
             schoolTypeName = itemView.findViewById(R.id.school_class_type_name);
 
 
@@ -74,16 +73,16 @@ holder.SetUpNode(classes.get(position));
             if (clickListener != null) clickListener.onClick(v, getAdapterPosition());
         }
 
-        public void SetUpNode(SchoolClassNode node){
+        public void SetUpNode(SchoolClassNode node) {
 
             startTime.setText(node.getStartTime());
-                    EndTime.setText(node.getEndTime());
+            EndTime.setText(node.getEndTime());
             moduleName.setText(node.module);
-                    specialityName.setText(node.speciality);
+            specialityName.setText(node.speciality);
             departementName.setText(node.departement);
-                    levelName.setText(DepartementRepository.getAvailableLevels().get(node.level));
-            sectionName.setText("Section :"+ node.section );
-                    groupName.setText("group N :"+node.school_group);
+            levelName.setText(DepartementRepository.getAvailableLevels().get(node.level));
+            sectionName.setText("Section :" + node.section);
+            groupName.setText("group N :" + node.school_group);
             schoolTypeName.setText(DepartementRepository.getSchoolClassType().get(node.school_classtype));
         }
     }
