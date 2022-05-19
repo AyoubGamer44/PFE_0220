@@ -6,6 +6,7 @@ import androidx.room.Query;
 import androidx.room.Transaction;
 
 import com.example.pfe_0220.Departement.Models.Departement;
+import com.example.pfe_0220.Departement.Models.Module;
 import com.example.pfe_0220.Departement.Models.Speciality;
 
 import java.util.List;
@@ -22,6 +23,9 @@ public interface DepartementDao {
     LiveData<List<Departement>> getAllDepartement();
 
 
+
+
+
     @Transaction
     @Insert
     void InsertSpeciality(Speciality speciality);
@@ -31,4 +35,10 @@ public interface DepartementDao {
     LiveData<List<Speciality>> getSpecialities(int departement_id);
 
 
+
+    @Query("select * from Module where speciality_id = :speciality_id   order by id")
+    LiveData<List<Module>> getModules(int speciality_id);
+
+@Insert
+    void InsertModule(Module module);
 }

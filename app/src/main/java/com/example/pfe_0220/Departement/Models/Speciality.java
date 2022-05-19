@@ -3,6 +3,7 @@ package com.example.pfe_0220.Departement.Models;
 import static androidx.room.ForeignKey.CASCADE;
 
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
@@ -32,5 +33,14 @@ public class Speciality {
     public Speciality(String name,int department_id) {
         this.name = name;
       this.department_id = department_id;
+    }
+
+
+    @Ignore
+
+    @NonNull
+    @Override
+    public String toString() {
+        return name;
     }
 }

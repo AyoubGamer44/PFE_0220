@@ -27,7 +27,7 @@
         app:helperText="Departements">
 
         <AutoCompleteTextView
-            android:id="@+id/specialities_drop_down_list"
+            android:id="@+id/depatement_drop_down_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -47,7 +47,7 @@
         app:helperText="Specialities">
 
         <AutoCompleteTextView
-            android:id="@+id/depatement_drop_down_list"
+            android:id="@+id/specialities_drop_down_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -55,28 +55,31 @@
             android:padding="5dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
-    <LinearLayout
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="8dp"
+
+
         android:layout_weight="1"
-        android:orientation="vertical">
+        app:helperText="Levels">
 
-        <TextView
+        <AutoCompleteTextView
+            android:id="@+id/levels_drop_down_list_edit_student"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="select Level"/>
+
+            android:inputType="none"
+            android:padding="5dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 
-        <NumberPicker
-            android:id="@+id/level_picker"
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            />
-
-
-    </LinearLayout>
-<LinearLayout
+    <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="1"

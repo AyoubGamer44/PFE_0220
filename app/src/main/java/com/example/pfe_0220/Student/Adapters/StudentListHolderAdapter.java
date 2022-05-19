@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class StudentListHolderAdapter extends RecyclerView.Adapter<StudentListHolderAdapter.ViewHolder> {
 
 
-    ArrayList<Student> students;
+    ArrayList<Student> students = new ArrayList<>();
 
     private ItemClickListener clickListener;
 
@@ -25,6 +25,7 @@ public class StudentListHolderAdapter extends RecyclerView.Adapter<StudentListHo
     }
 
 public void UpdateStudentList(ArrayList<Student> _students){
+        students.clear();
         students = _students;
         notifyDataSetChanged();
 }
@@ -44,7 +45,7 @@ public void UpdateStudentList(ArrayList<Student> _students){
 
     @Override
     public int getItemCount() {
-        if(students == null) return 0;
+
         return students.size();
     }
 

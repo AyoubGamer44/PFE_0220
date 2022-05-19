@@ -18,6 +18,7 @@ android:paddingVertical="8dp"
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/start_time"
             android:textAlignment="center"
             android:textStyle="bold"
           android:textSize="@dimen/text_big"
@@ -26,6 +27,7 @@ android:paddingVertical="8dp"
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/end_time"
             android:textAlignment="center"
             android:textStyle="bold"
           android:textSize="@dimen/text_big"
@@ -41,6 +43,7 @@ android:paddingHorizontal="5dp"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/module_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
        android:textSize="@dimen/text_big"
@@ -50,11 +53,13 @@ android:paddingHorizontal="5dp"
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/speciality_name"
             android:text="Spaciality" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/departement_name"
             android:text="Departement" />
     </LinearLayout>
 
@@ -69,6 +74,7 @@ android:paddingHorizontal="5dp"
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/level_name"
            android:textStyle="bold"
            android:textAlignment="center"
             android:text="Master 01" />
@@ -76,7 +82,7 @@ android:paddingHorizontal="5dp"
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+android:id="@+id/section_name"
             android:textAlignment="center"
             android:text="Section 01" />
 
@@ -84,6 +90,7 @@ android:paddingHorizontal="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:id="@+id/group_name"
             android:textAlignment="center"
             android:drawableEnd="@drawable/ic_student_small"
             android:text="G : 01 (24)" />
@@ -94,6 +101,7 @@ android:paddingHorizontal="5dp"
     <TextView
         android:layout_gravity="center"
         android:layout_width="wrap_content"
+        android:id="@+id/school_class_type_name"
      android:padding="@dimen/medim_text"
         android:layout_margin="5dp"
         android:textStyle="bold"

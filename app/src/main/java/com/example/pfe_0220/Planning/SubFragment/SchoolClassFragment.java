@@ -4,17 +4,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pfe_0220.MainActivity;
 import com.example.pfe_0220.Planning.Adapter.SchoolClassesAdapter;
+import com.example.pfe_0220.Planning.Models.SchoolClassNode;
+import com.example.pfe_0220.Planning.PlanningViewModel;
 import com.example.pfe_0220.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SchoolClassFragment extends Fragment implements SchoolClassesAdapter.ItemClickListener {
 
@@ -22,6 +28,7 @@ public class SchoolClassFragment extends Fragment implements SchoolClassesAdapte
     RecyclerView schoolClassesHolder;
     SchoolClassesAdapter schoolClassesAdapter;
     RecyclerView.LayoutManager mlayoutManager;
+    PlanningViewModel planningViewModel;
 
 
     @Nullable
@@ -30,9 +37,12 @@ public class SchoolClassFragment extends Fragment implements SchoolClassesAdapte
         return inflater.inflate(R.layout.fragment_school_class, container, false);
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        planningViewModel = new ViewModelProvider(requireActivity()).get(PlanningViewModel.class);
 
         mlayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         schoolClassesAdapter = new SchoolClassesAdapter();
@@ -40,13 +50,18 @@ public class SchoolClassFragment extends Fragment implements SchoolClassesAdapte
         schoolClassesHolder.setLayoutManager(mlayoutManager);
         schoolClassesHolder.setAdapter(schoolClassesAdapter);
         schoolClassesAdapter.setClickListener(this);
-
+        planningViewModel.planningRepository.plannedSchoolClasses.observe(getViewLifecycleOwner(), new Observer<List<SchoolClassNode>>() {
+            @Override
+            public void onChanged(List<SchoolClassNode> schoolClassNodes) {
+                schoolClassesAdapter.UpdateClassesList((ArrayList<SchoolClassNode>) schoolClassNodes);
+            }
+        });
 
     }
 
     @Override
     public void onClick(View view, int position) {
-
-        ((MainActivity)getActivity()).ShowFragment(new SchoolClassAttendenceFragment()," classes attendences ");
+planningViewModel.selected_school_class = schoolClassesAdapter.classes.get(position);
+        ((MainActivity) getActivity()).ShowFragment(new SchoolClassAttendenceFragment(), " classes attendences ");
     }
 }

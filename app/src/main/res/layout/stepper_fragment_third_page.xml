@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_margin="@dimen/medim_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        style="@style/MainTextStyle"
+        android:background="@drawable/border"
+        android:text="start time"
+
+        android:drawablePadding="5dp"
+        android:id="@+id/start_time_picker"
+        android:drawableTop="@drawable/ic_time_picker"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/medim_text"
+        style="@style/MainTextStyle"
+        android:text="end time"
+        android:background="@drawable/border"
+
+        android:drawablePadding="5dp"
+        android:id="@+id/end_time_picker"
+        android:drawableTop="@drawable/ic_time_picker"/>
+
+
+
+
+
+
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:layout_weight="1"
+
+        app:helperText="Specialities">
+
+        <AutoCompleteTextView
+            android:id="@+id/school_type_drop_down_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:inputType="none"
+            android:padding="5dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+</LinearLayout>

@@ -22,6 +22,11 @@ public class TeacherRepository {
     public TeacherRepository(Application application) {
         ApplicationDatabase database = ApplicationDatabase.getInstance(application);
         dao = database.teacherDao();
+        try {
+            getAllTeacher();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

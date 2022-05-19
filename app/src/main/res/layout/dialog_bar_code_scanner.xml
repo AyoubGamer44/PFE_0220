@@ -30,13 +30,14 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/buttonsHolder"
         android:background="@color/teal_200">
-        <TextView
-            android:layout_width="match_parent"
-            android:id="@+id/scanning_message"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
 
-            android:text="Scanning . . . "/>
+        <TextView
+            android:id="@+id/scanning_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Scanning . . . "
+
+            android:textAlignment="center" />
 
         <include layout="@layout/node_student_attendence"
             android:id="@+id/student_node"
@@ -58,14 +59,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginHorizontal="5dp"
-            android:text="Cancel" />
+            android:text="Finish" />
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="5dp"
-            android:layout_weight="1"
-            android:text="Save" />
+
 
     </LinearLayout>
 

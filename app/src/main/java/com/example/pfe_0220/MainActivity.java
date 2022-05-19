@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.pfe_0220.Departement.DepartementFragment;
 import com.example.pfe_0220.Planning.PlanningFragment;
+import com.example.pfe_0220.Planning.SubFragment.AddPlanificationFragment;
 import com.example.pfe_0220.Profile.ProfileFragment;
 import com.example.pfe_0220.Student.StudentFragment;
 import com.example.pfe_0220.Teacher.TeacherFragment;
@@ -110,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void CreateNewPlanning() {
-        Toast.makeText(this, "add new planning", Toast.LENGTH_SHORT).show();
+        ShowFragment(new AddPlanificationFragment(), "add new Planning");
         drawer.closeDrawer(GravityCompat.START);
     }
 

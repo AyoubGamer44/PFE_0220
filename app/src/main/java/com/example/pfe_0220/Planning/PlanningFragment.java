@@ -15,9 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.pfe_0220.MainActivity;
 import com.example.pfe_0220.Planning.Adapter.ClassesFragmentViewPagerAdapter;
 import com.example.pfe_0220.Planning.Adapter.SchoolYearDaysAdapter;
+import com.example.pfe_0220.Planning.SubFragment.AddPlanificationFragment;
 import com.example.pfe_0220.R;
+import com.example.pfe_0220.databinding.StepperAddPlanificationFragmentsHolderBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -29,16 +33,27 @@ public class PlanningFragment extends Fragment {
     RecyclerView school_year_days_holder;
     SchoolYearDaysAdapter schoolYearDaysAdapter;
     TextView school_year;
-TabLayout tabLayout;
+    TabLayout tabLayout;
     ViewPager classesFragmentsHolder;
     ClassesFragmentViewPagerAdapter schoolClassesAdapter;
 
+    FloatingActionButton addnewPlanningBtn;
 
+
+    /**
+     * this is autogenrated method to create the view responsible of rendering the UI
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_planning, container, false);
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -46,22 +61,20 @@ TabLayout tabLayout;
 
         vm = new ViewModelProvider(requireActivity()).get(PlanningViewModel.class);
 
-      DaysScroolBarConfiguration(view);
+        DaysScroolBarConfiguration(view);
+        TabPanelsConfiguration(view);
+        LinkViews(view);
 
-tabLayout = view.findViewById(R.id.tab_class_type);
 
-      classesFragmentsHolder = view.findViewById(R.id.view_pager_class_fragment_holder);
-      schoolClassesAdapter = new ClassesFragmentViewPagerAdapter(getChildFragmentManager());
+        addnewPlanningBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).ShowFragment(new AddPlanificationFragment(), "add new Planning");
+            }
+        });
 
-classesFragmentsHolder.setAdapter(schoolClassesAdapter);
 
-        tabLayout.setupWithViewPager(classesFragmentsHolder);
-        tabLayout.getTabAt(0).setText("All");
-        tabLayout.getTabAt(1).setText("Cours");
-        tabLayout.getTabAt(2).setText("TD");
-        tabLayout.getTabAt(3).setText("TP");
-        tabLayout.getTabAt(4).setText("Exams");
-      vm.school_year_days.observe(getViewLifecycleOwner(), new Observer<ArrayList<Calendar>>() {
+        vm.school_year_days.observe(getViewLifecycleOwner(), new Observer<ArrayList<Calendar>>() {
             @Override
             public void onChanged(ArrayList<Calendar> days) {
                 UpdateDaysScroolBar(days);
@@ -69,7 +82,29 @@ classesFragmentsHolder.setAdapter(schoolClassesAdapter);
         });
 
 
+    }
 
+    private void LinkViews(View view) {
+
+        addnewPlanningBtn = view.findViewById(R.id.add_planing_btn);
+
+    }
+
+    private void TabPanelsConfiguration(View view) {
+
+        tabLayout = view.findViewById(R.id.tab_class_type);
+
+        classesFragmentsHolder = view.findViewById(R.id.view_pager_class_fragment_holder);
+        schoolClassesAdapter = new ClassesFragmentViewPagerAdapter(getChildFragmentManager());
+
+        classesFragmentsHolder.setAdapter(schoolClassesAdapter);
+
+        tabLayout.setupWithViewPager(classesFragmentsHolder);
+        tabLayout.getTabAt(0).setText("All");
+        tabLayout.getTabAt(1).setText("Cours");
+        tabLayout.getTabAt(2).setText("TD");
+        tabLayout.getTabAt(3).setText("TP");
+        tabLayout.getTabAt(4).setText("Exams");
 
     }
 
@@ -96,4 +131,6 @@ classesFragmentsHolder.setAdapter(schoolClassesAdapter);
         school_year_days_holder.setLayoutManager(mlayoutManager);
         school_year_days_holder.setAdapter(schoolYearDaysAdapter);
     }
+
+
 }

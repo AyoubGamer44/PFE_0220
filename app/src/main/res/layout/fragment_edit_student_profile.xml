@@ -10,8 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
         android:layout_margin="10dp"
+        android:layout_weight="4"
         android:orientation="horizontal">
 
         <ImageView
@@ -33,9 +33,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Student name" />
+                    android:text="first name" />
 
                 <EditText
+                    android:id="@+id/studentFirstName_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="type here" />
@@ -53,6 +54,7 @@
                     android:text="Student name" />
 
                 <EditText
+                    android:id="@+id/studentLastName_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="type here" />
@@ -69,8 +71,29 @@
                     android:layout_height="wrap_content"
                     android:text="Student name" />
 
-                <EditText
+                <TextView
+                    android:id="@+id/birth_date"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_calendar"
+                    android:text="birth_date" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Student id" />
+
+                <EditText
+                    android:id="@+id/student_id"
+                    android:layout_width="match_parent"
+                    android:inputType="number"
                     android:layout_height="wrap_content"
                     android:hint="type here" />
             </LinearLayout>
@@ -89,12 +112,60 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Student name" />
+            android:text="Student Adress" />
 
         <EditText
+            android:id="@+id/adress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="type here" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Student Adress" />
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="type here" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Student Adress" />
+
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="type here" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -102,14 +173,14 @@
 
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="16dp"
+        android:layout_margin="8dp"
 
 
         android:layout_weight="1"
         app:helperText="Departements">
 
         <AutoCompleteTextView
-            android:id="@+id/specialities_drop_down_list_edit_profile"
+            android:id="@+id/departement_drop_down_list_edit_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -123,11 +194,11 @@
 
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="16dp"
+        android:layout_margin="8dp"
 
 
         android:layout_weight="1"
-        app:helperText="Departements">
+        app:helperText="speciality">
 
         <AutoCompleteTextView
             android:id="@+id/specialities_drop_down_list_edit_student"
@@ -139,6 +210,26 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+
+
+        android:layout_weight="1"
+        app:helperText="Levels">
+
+        <AutoCompleteTextView
+            android:id="@+id/levels_drop_down_list_edit_student"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:inputType="none"
+            android:padding="5dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -147,26 +238,6 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="select Level" />
-
-
-            <NumberPicker
-                android:id="@+id/level_picker_edit_student"
-                android:layout_width="match_parent"
-
-                android:layout_height="wrap_content" />
-
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -177,7 +248,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="select Level" />
+                android:text="select section"
+                android:textAlignment="center" />
 
 
             <NumberPicker
@@ -198,7 +270,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="select Level" />
+                android:text="select Level"
+                android:textAlignment="center" />
 
 
             <NumberPicker
@@ -220,15 +293,16 @@
 
         <Button
             android:layout_width="0dp"
-            android:layout_margin="5dp"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:layout_weight="1"
             android:text="Cancel" />
 
         <Button
+            android:id="@+id/save_btn"
             android:layout_width="0dp"
-            android:layout_margin="5dp"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:layout_weight="1"
             android:text="Save" />
 

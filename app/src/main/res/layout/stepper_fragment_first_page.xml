@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:layout_weight="1"
+
+        app:helperText="Departement">
+
+    <AutoCompleteTextView
+        android:id="@+id/departement_drop_down_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:inputType="none"
+        android:padding="5dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:layout_weight="1"
+
+        app:helperText="Speciality">
+
+        <AutoCompleteTextView
+            android:id="@+id/speciality_drop_down_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:inputType="none"
+            android:padding="5dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:layout_weight="1"
+
+        app:helperText="Module">
+
+        <AutoCompleteTextView
+            android:id="@+id/Modules_drop_down_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:inputType="none"
+            android:padding="5dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+</LinearLayout>

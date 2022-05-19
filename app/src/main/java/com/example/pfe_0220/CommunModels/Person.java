@@ -1,12 +1,10 @@
 package com.example.pfe_0220.CommunModels;
 
 
-
-
 public class Person  {
 
 
-
+public static String[] PersonType  = {"Student","Responsible"};
 
     public int id;
 
@@ -30,5 +28,8 @@ public class Person  {
         this.firstName = firstName;
         this.lastName = lastName;
 
+    }
+
+    public Person() {
     }
 }

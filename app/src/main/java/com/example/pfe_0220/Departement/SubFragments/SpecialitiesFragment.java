@@ -25,6 +25,7 @@ import com.example.pfe_0220.Departement.Adapters.SpecialitiesListAdapter;
 import com.example.pfe_0220.Departement.DepartementViewModel;
 import com.example.pfe_0220.Departement.Models.Departement;
 import com.example.pfe_0220.Departement.Models.Speciality;
+import com.example.pfe_0220.MainActivity;
 import com.example.pfe_0220.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -111,7 +112,16 @@ departementViewModel.departementRepository.savedSpecialities.observe(getViewLife
 
     @Override
     public void onClick(View view, int position) {
-        Toast.makeText(getContext(), "show info about the selected speciality", Toast.LENGTH_SHORT).show();
+
+        departementViewModel.selected_speciality = specialitiesListAdapter.specialities.get(position).id;
+        try {
+            departementViewModel.departementRepository.getModuleof( specialitiesListAdapter.specialities.get(position).id);
+            ((MainActivity)getActivity()).ShowFragment(new ModulesFragment(),"modules of "+specialitiesListAdapter.specialities.get(position).name);
+        } catch (Exception e) {
+            Toast.makeText(getContext(), "some error when loading modules occured", Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 
 

@@ -8,11 +8,13 @@ import androidx.lifecycle.MutableLiveData;
 
 
 import com.example.pfe_0220.Departement.Models.Departement;
+import com.example.pfe_0220.Departement.Models.Module;
 import com.example.pfe_0220.Departement.Models.Speciality;
 
 public class DepartementViewModel extends AndroidViewModel {
 
     public  int selected_departement;
+    public  int selected_speciality;
 
 
     public  DepartementRepository departementRepository;
@@ -49,6 +51,7 @@ public MutableLiveData<Boolean> status = new MutableLiveData<Boolean>();
     }
 
 
-
-
+    public void InsertModule(Module m) throws Exception {
+        departementRepository.InsertModule(m);
+    }
 }

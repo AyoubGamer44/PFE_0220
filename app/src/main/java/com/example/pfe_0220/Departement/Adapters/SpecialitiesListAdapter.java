@@ -20,7 +20,7 @@ public class SpecialitiesListAdapter extends RecyclerView.Adapter<SpecialitiesLi
         public void onClick(View view, int position);
     }
 
-ArrayList<Speciality> specialities  = new ArrayList<>();
+public ArrayList<Speciality> specialities  = new ArrayList<>();
     private ItemClickListener clickListener;
 
 

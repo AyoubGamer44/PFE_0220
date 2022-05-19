@@ -1,11 +1,12 @@
 package com.example.pfe_0220.Student;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,16 +16,20 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pfe_0220.Departement.DepartementViewModel;
+import com.example.pfe_0220.Departement.Models.Departement;
+import com.example.pfe_0220.Departement.Models.Speciality;
 import com.example.pfe_0220.MainActivity;
 import com.example.pfe_0220.R;
 import com.example.pfe_0220.Student.Adapters.StudentListHolderAdapter;
-import com.example.pfe_0220.Student.Dialog.BottomSheetFilter;
+import com.example.pfe_0220.Student.Dialog.FilterDialog;
 import com.example.pfe_0220.Student.Model.Student;
 import com.example.pfe_0220.Student.SubFragments.EditStudentProfileFragment;
 import com.example.pfe_0220.Student.SubFragments.StudentDetailsFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class StudentFragment extends Fragment implements StudentListHolderAdapter.ItemClickListener {
@@ -35,7 +40,7 @@ public class StudentFragment extends Fragment implements StudentListHolderAdapte
     RecyclerView.LayoutManager mlayoutManager;
     Button changeGroupBtn;
 
-
+    DepartementViewModel departementViewModel;
     //Data variables
     StudentViewModel studentViewModel;
 
@@ -54,7 +59,7 @@ public class StudentFragment extends Fragment implements StudentListHolderAdapte
         super.onViewCreated(view, savedInstanceState);
         studentViewModel = new ViewModelProvider(requireActivity()).get(StudentViewModel.class);
 
-
+        departementViewModel = new ViewModelProvider(requireActivity()).get(DepartementViewModel.class);
         studentListHolder = view.findViewById(R.id.student_list_holder);
         mlayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         studentListHolder.setLayoutManager(mlayoutManager);
@@ -62,38 +67,104 @@ public class StudentFragment extends Fragment implements StudentListHolderAdapte
         studentListHolder.setAdapter(studentListHolderAdapter);
 
 
-        studentViewModel.studentRepository.selectedStudents.observe(getViewLifecycleOwner(), new Observer<ArrayList<Student>>() {
+        FilterDialog filterDialog = new FilterDialog(getContext());
+        filterDialog.create();
+
+        studentListHolderAdapter.setClickListener(this);
+
+        try {
+            departementViewModel.departementRepository.getDepartement();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        departementViewModel.departementRepository.savedDepartements.observe(getViewLifecycleOwner(), new Observer<List<Departement>>() {
             @Override
-            public void onChanged(ArrayList<Student> students) {
-                studentListHolderAdapter.UpdateStudentList(students);
+            public void onChanged(List<Departement> departements) {
+                filterDialog.departement_drop_down_list_adapter.UpdateElement((ArrayList<Departement>) departements);
+
+
             }
         });
 
 
-       BottomSheetFilter bottomSheetDialog = new BottomSheetFilter(getContext(), null);
+        filterDialog.departementlist_holder.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                int selected_departement_id = position;
+
+                try {
+                    departementViewModel.departementRepository.getSpecialitiesOf(selected_departement_id);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+//upload specialities of that departement
+                departementViewModel.departementRepository.savedSpecialities.observe(getViewLifecycleOwner(), new Observer<List<Speciality>>() {
+                    @Override
+                    public void onChanged(List<Speciality> specialities) {
+                        filterDialog.specialities_drop_down_list_adapter.UpdateElement((ArrayList<Speciality>) specialities);
+                    }
+                });
+                filterDialog.selected_departement = selected_departement_id;
 
 
-        studentListHolderAdapter.setClickListener(this);
+            }
+        });
 
 
-        bottomSheetDialog.create();
+        filterDialog.specialities_holder.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int selected_speciality_id = position + 1;
+
+                filterDialog.selected_speciality = selected_speciality_id;
+            }
+        });
+
 
         changeGroupBtn = view.findViewById(R.id.group_filter_button);
         changeGroupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                bottomSheetDialog.show();
+                filterDialog.show();
 
             }
         });
 
-        bottomSheetDialog.InjectListner(new View.OnClickListener() {
+        filterDialog.InjectListner(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-              studentViewModel.getStudentof(1, 1, 1, 1, "A");
-                bottomSheetDialog.dismiss();
+                try {
+
+
+                    studentViewModel.getStudentof(filterDialog.selected_departement, filterDialog.selected_speciality, filterDialog.selected_section, filterDialog.selected_level, filterDialog.selected_group);
+
+                    studentViewModel.studentRepository.foundStudent.observe(getViewLifecycleOwner(), new Observer<List<Student>>() {
+                        @Override
+                        public void onChanged(List<Student> students) {
+                            filterDialog.selected_group = filterDialog.groupPicker.getValue();
+                            filterDialog.selected_section = filterDialog.sectionPicker.getValue();
+
+                            new AlertDialog.Builder(getContext()).
+
+                                    setMessage("dep" + filterDialog.selected_departement + "spec " + filterDialog.selected_speciality + " level" + filterDialog.selected_level + "section " + filterDialog.selected_section + "group " + filterDialog.selected_group).
+                                    create().
+                                    show();
+                            studentListHolderAdapter.UpdateStudentList((ArrayList<Student>) students);
+                        }
+                    });
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                filterDialog.dismiss();
             }
         });
 

@@ -2,34 +2,46 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@drawable/border"
     android:padding="10dp">
 
     <TextView
-        android:layout_width="0dp"
-
+        android:id="@+id/studentName"
         style="@style/student_attendence"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Student name" />
+        android:text="Student name"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/studentId"
+        style="@style/student_attendence"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        style="@style/student_attendence"
         android:text="13246798132" />
 
     <TextView
-        android:layout_width="0dp"
+        android:id="@+id/enter_time"
         style="@style/student_attendence"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="08:15" />
+        android:layout_weight=".5"
+        android:text="08:15"
+        android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/presence_state"
+        style="@style/student_attendence"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        style="@style/student_attendence"
-        android:text=" P " />
+        android:layout_weight=".3"
+        android:background="@drawable/school_class_type_circle"
+        android:padding="5dp"
+        android:text=" P "
+        android:textSize="@dimen/text_big"
+        android:textStyle="bold" />
 </LinearLayout>
