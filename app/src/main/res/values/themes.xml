@@ -15,4 +15,24 @@
         <!-- Customize your theme here. -->
 
     </style>
+
+    <style name="MainTextStyle">
+        <item name="android:textSize">@dimen/text_big</item>
+        <item name="android:padding">@dimen/text_margin</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
+
+
+    </style>
+
+
+    <style name="MediumTextStyle">
+        <item name="android:textSize">@dimen/text_big</item>
+        <item name="android:padding">@dimen/medim_text_margin</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
+
+
+    </style>
+
 </resources>

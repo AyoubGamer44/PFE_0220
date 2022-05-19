@@ -56,6 +56,8 @@ public class SchoolYearDaysAdapter extends RecyclerView.Adapter<SchoolYearDaysAd
         }
 
         public void SetUpViewHolder(Calendar day) {
+            if(day.get(Calendar.DAY_OF_MONTH) < 10)   day_num.setText("0"+day.get(Calendar.DAY_OF_MONTH)+"");
+            else
             day_num.setText(day.get(Calendar.DAY_OF_MONTH)+"");
             month_name.setText(new SimpleDateFormat("MMM").format(day.getTime()));
         }
