@@ -3,7 +3,9 @@ package com.example.pfe_0220;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -12,11 +14,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.pfe_0220.Departement.DepartementFragment;
 import com.example.pfe_0220.Planning.PlanningFragment;
 import com.example.pfe_0220.Planning.SubFragment.AddPlanificationFragment;
 import com.example.pfe_0220.Profile.ProfileFragment;
+import com.example.pfe_0220.Profile.ProfileViewModel;
 import com.example.pfe_0220.Student.StudentFragment;
 import com.example.pfe_0220.Teacher.TeacherFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -26,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DrawerLayout drawer;
     NavigationView navigationView;
     Toolbar toolbar;
+    LinearLayout nav_header;
+    ProfileViewModel profileViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +46,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             InitialiseActivity();
         }
 
-
+        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
     } // end of activity
 
     public void InitialiseActivity() {
-        ShowFragment(new PlanningFragment(),"Planning");
+        ShowFragment(new PlanningFragment(), "Planning");
         navigationView.setCheckedItem(R.id.planinng);
     }
 
@@ -54,6 +60,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void NavigationConfiguration() {
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View header = navigationView.getHeaderView(0);
+        TextView userName = (TextView) header.findViewById(R.id.userName);
+        userName.setText(profileViewModel.profileRepository.currentUser.firstName + " " + profileViewModel.profileRepository.currentUser.lastName);
     }
 
     /**
@@ -61,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      */
     private void ToolBarConfiguration() {
 
-         toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.nav_open, R.string.nav_close);
@@ -71,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     /**
      * hundle click event of the nav drawer
+     *
      * @param item
      * @return
      */
@@ -78,19 +88,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.planinng:
-                ShowFragment(new PlanningFragment(),"planing");
+                ShowFragment(new PlanningFragment(), "planing");
                 break;
             case R.id.student:
-                ShowFragment(new StudentFragment(),"Students List");
+                ShowFragment(new StudentFragment(), "Students List");
                 break;
             case R.id.teachers:
-                ShowFragment(new TeacherFragment(),"Teacher list");
+                ShowFragment(new TeacherFragment(), "Teacher list");
                 break;
             case R.id.departement:
-                ShowFragment(new DepartementFragment(),"Departements");
+                ShowFragment(new DepartementFragment(), "Departements");
                 break;
             case R.id.profile:
-                ShowFragment(new ProfileFragment(),"User Profile");
+                ShowFragment(new ProfileFragment(), "User Profile");
                 break;
             case R.id.add_planing:
                 CreateNewPlanning();
@@ -104,8 +114,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void Logout() {
         drawer.closeDrawer(GravityCompat.START);
+
+        profileViewModel.profileRepository.currentUser = null;
+
         //launch the welcome activity
-        Intent intent = new Intent(this,WelcomeActivity.class);
+        Intent intent = new Intent(this, WelcomeActivity.class);
         startActivity(intent);
     }
 
@@ -114,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
     }
 
-    public void ShowFragment(Fragment fragment,String fragment_name) {
+    public void ShowFragment(Fragment fragment, String fragment_name) {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
         toolbar.setTitle(fragment_name);
         drawer.closeDrawer(GravityCompat.START);

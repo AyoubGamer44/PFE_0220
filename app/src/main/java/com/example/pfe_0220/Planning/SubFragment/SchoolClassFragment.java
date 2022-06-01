@@ -17,6 +17,7 @@ import com.example.pfe_0220.MainActivity;
 import com.example.pfe_0220.Planning.Adapter.SchoolClassesAdapter;
 import com.example.pfe_0220.Planning.Models.SchoolClassNode;
 import com.example.pfe_0220.Planning.PlanningViewModel;
+import com.example.pfe_0220.Planning.ViewModels.SchoolClassesViewModel;
 import com.example.pfe_0220.R;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class SchoolClassFragment extends Fragment implements SchoolClassesAdapte
     SchoolClassesAdapter schoolClassesAdapter;
     RecyclerView.LayoutManager mlayoutManager;
     PlanningViewModel planningViewModel;
-
+SchoolClassesViewModel schoolClassesViewModel;
 
     @Nullable
     @Override
@@ -50,6 +51,9 @@ public class SchoolClassFragment extends Fragment implements SchoolClassesAdapte
         schoolClassesHolder.setLayoutManager(mlayoutManager);
         schoolClassesHolder.setAdapter(schoolClassesAdapter);
         schoolClassesAdapter.setClickListener(this);
+
+        schoolClassesViewModel = new ViewModelProvider(requireActivity()).get(SchoolClassesViewModel.class);
+
         planningViewModel.planningRepository.plannedSchoolClasses.observe(getViewLifecycleOwner(), new Observer<List<SchoolClassNode>>() {
             @Override
             public void onChanged(List<SchoolClassNode> schoolClassNodes) {
@@ -61,7 +65,12 @@ public class SchoolClassFragment extends Fragment implements SchoolClassesAdapte
 
     @Override
     public void onClick(View view, int position) {
-planningViewModel.selected_school_class = schoolClassesAdapter.classes.get(position);
+        planningViewModel.selected_school_class = schoolClassesAdapter.classes.get(position);
+        try {
+            schoolClassesViewModel.GetStudentOf(planningViewModel.selected_school_class.id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         ((MainActivity) getActivity()).ShowFragment(new SchoolClassAttendenceFragment(), " classes attendences ");
     }
 }

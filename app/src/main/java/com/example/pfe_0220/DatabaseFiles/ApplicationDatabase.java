@@ -12,12 +12,13 @@ import com.example.pfe_0220.Departement.Models.Module;
 import com.example.pfe_0220.Departement.Models.Speciality;
 import com.example.pfe_0220.Planning.Models.Attendence;
 import com.example.pfe_0220.Planning.Models.SchoolClass;
+import com.example.pfe_0220.Profile.Models.ManagerProfile;
 import com.example.pfe_0220.Student.Model.Student;
 import com.example.pfe_0220.Teacher.Model.Teacher;
 
 
 @Database(
-        entities = {Departement.class, Speciality.class, Teacher.class, SchoolClass.class, Module.class, Student.class, Attendence.class}, version = 1)
+        entities = {Departement.class, Speciality.class, Teacher.class, SchoolClass.class, Module.class, Student.class, Attendence.class, ManagerProfile.class}, version = 1)
 @TypeConverters({Converters.class})
 public abstract class ApplicationDatabase extends RoomDatabase {
 
@@ -26,6 +27,7 @@ public abstract class ApplicationDatabase extends RoomDatabase {
     public abstract TeacherDao teacherDao();
     public abstract PlanningDao planningDao();
     public abstract StudentDao studentDao();
+    public abstract ProfileDao profileDao();
 
     private static ApplicationDatabase instance;
 
