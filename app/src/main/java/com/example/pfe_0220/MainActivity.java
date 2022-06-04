@@ -25,6 +25,8 @@ import com.example.pfe_0220.Student.StudentFragment;
 import com.example.pfe_0220.Teacher.TeacherFragment;
 import com.google.android.material.navigation.NavigationView;
 
+import org.w3c.dom.Text;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
@@ -60,9 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void NavigationConfiguration() {
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        View header = navigationView.getHeaderView(0);
-        TextView userName = (TextView) header.findViewById(R.id.userName);
-        userName.setText(profileViewModel.profileRepository.currentUser.firstName + " " + profileViewModel.profileRepository.currentUser.lastName);
+
     }
 
     /**

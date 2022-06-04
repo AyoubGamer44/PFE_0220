@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:id="@+id/nav_header"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="?attr/actionBarSize"
     android:gravity="bottom"
 
-    android:padding="6dp"
+    android:orientation="vertical"
 
-    >
-<ImageView
-    android:layout_width="wrap_content"
+    android:padding="6dp">
 
-    android:layout_height="wrap_content"
-    android:src="@drawable/application_logo"/>
+    <ImageView
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:src="@drawable/application_logo" />
 
     <TextView
         android:id="@+id/userName"
@@ -21,7 +22,7 @@
         android:layout_height="wrap_content"
         android:paddingVertical="@dimen/medim_text"
         android:paddingTop="8dp"
-        android:text="Manager Name"
+        android:text=" BIENVENUE  "
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -29,6 +30,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Manager"/>
+        android:text="Manager" />
 
 </LinearLayout>
