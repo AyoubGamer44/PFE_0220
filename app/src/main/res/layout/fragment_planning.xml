@@ -16,6 +16,7 @@
             android:id="@+id/school_year"
             style="@style/MainTextStyle"
 android:background="@color/light_brown"
+            android:clickable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_calendar"

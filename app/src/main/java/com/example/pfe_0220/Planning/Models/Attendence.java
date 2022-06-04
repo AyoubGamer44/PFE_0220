@@ -32,12 +32,12 @@ public class Attendence {
     public int id;
     public int module_id;
     public int schoolClass_id;
-    public int student_id;
+    public String student_id;
     public Calendar enterTime;
     public  int presenceType; // responsible or student
     public int state;
 
-    public Attendence(int id, int module_id, int schoolClass_id, int student_id, Calendar enterTime, int presenceType, int state) {
+    public Attendence(int id, int module_id, int schoolClass_id, String student_id, Calendar enterTime, int presenceType, int state) {
         this.id = id;
         this.module_id = module_id;
         this.schoolClass_id = schoolClass_id;
@@ -48,7 +48,7 @@ public class Attendence {
     }
 
     @Ignore
-    public Attendence(int module_id, int schoolClass_id, int student_id, Calendar enterTime, int presenceType, int state) {
+    public Attendence(int module_id, int schoolClass_id, String student_id, Calendar enterTime, int presenceType, int state) {
         this.module_id = module_id;
         this.schoolClass_id = schoolClass_id;
         this.student_id = student_id;
@@ -70,7 +70,7 @@ public class Attendence {
         schoolClass_id = schoolClass_id;
     }
 
-    public void setStudent_id(int student_id) {
+    public void setStudent_id(String student_id) {
         this.student_id = student_id;
     }
 

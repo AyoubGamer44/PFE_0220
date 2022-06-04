@@ -19,7 +19,7 @@ public class StudentViewModel extends AndroidViewModel {
 
    public Student newStudent;
 
-public int selectedStudent_id;
+public String selectedStudent_id;
 
 
 

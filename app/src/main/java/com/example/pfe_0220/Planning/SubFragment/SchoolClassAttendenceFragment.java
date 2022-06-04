@@ -30,15 +30,15 @@ import com.example.pfe_0220.Planning.Models.AttendenceNode;
 import com.example.pfe_0220.Planning.Models.SchoolClassNode;
 import com.example.pfe_0220.Planning.PlanningViewModel;
 import com.example.pfe_0220.Planning.ViewModels.SchoolClassesViewModel;
+import com.example.pfe_0220.Profile.ProfileViewModel;
 import com.example.pfe_0220.R;
 import com.example.pfe_0220.Student.Model.Student;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.zxing.Result;
 
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -62,22 +62,29 @@ public class SchoolClassAttendenceFragment extends Fragment {
     ArrayList<Fragment> fragements = new ArrayList<>();
 
     PlanningViewModel planningViewModel;
-
+    ProfileViewModel profileViewModel;
+    TextView planifierName;
 
     TextView moduleName, speciaityName, departementName, eventType, timing, level, group;
 
     int attendence_id;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+        schoolClassesViewModel = new ViewModelProvider(requireActivity()).get(SchoolClassesViewModel.class);
+        planningViewModel = new ViewModelProvider(requireActivity()).get(PlanningViewModel.class);
+        profileViewModel = new ViewModelProvider(requireActivity()).get(ProfileViewModel.class);
+
 
         InitialiseFragments();
         LinkViews(view);
 
         ConstructScannerDialog();
 
-        schoolClassesViewModel = new ViewModelProvider(requireActivity()).get(SchoolClassesViewModel.class);
-        planningViewModel = new ViewModelProvider(requireActivity()).get(PlanningViewModel.class);
+
 
 
         SetUpClassInfo(planningViewModel.selected_school_class);
@@ -101,6 +108,7 @@ public class SchoolClassAttendenceFragment extends Fragment {
         timing.setText(selected_school_class.getStartTime() + " - " + selected_school_class.getEndTime());
         level.setText(DepartementRepository.getAvailableLevels().get(selected_school_class.level));
         group.setText("group N :" + selected_school_class.school_group + "");
+   planifierName.setText("planified on : " +selected_school_class.start_time.get(Calendar.YEAR)+" / "+selected_school_class.start_time.get(Calendar.MONTH)+" / "+ selected_school_class.start_time.get(Calendar.DAY_OF_MONTH));
     }
 
 
@@ -117,7 +125,7 @@ public class SchoolClassAttendenceFragment extends Fragment {
         personPager = v.findViewById(R.id.personPager);
         scan_btn = v.findViewById(R.id.scan_button);
 
-
+planifierName = v.findViewById(R.id.planifer_name);
         personPagerAdapter = new PersonPagerAdapter(getChildFragmentManager(), fragements);
         personPager.setAdapter(personPagerAdapter);
 
@@ -170,24 +178,24 @@ public class SchoolClassAttendenceFragment extends Fragment {
                     @Override
                     public void run() {
 
-                        int scanned_id = Integer.parseInt(result.getText());
+                        String scanned_id = result.getText().toString();
 
                         try {
                             schoolClassesViewModel.schoolClassRepository.studentsAttendence.observe(getViewLifecycleOwner(), new Observer<List<AttendenceNode>>() {
                                 @Override
                                 public void onChanged(List<AttendenceNode> attendenceNodes) {
-                                    attendence_id =AttendenceNode.getAttendenceof(scanned_id, (ArrayList<AttendenceNode>) attendenceNodes);
+                                    attendence_id = AttendenceNode.getAttendenceof(scanned_id, (ArrayList<AttendenceNode>) attendenceNodes);
                                 }
                             });
                             Attendence attendence = schoolClassesViewModel.getAttendenceOf(attendence_id);
                             Student scannedStudent = planningViewModel.studentRepository.getStudentwithId(scanned_id);
-                            ToggleScanState(ScanState.student,scannedStudent);
+                            ToggleScanState(ScanState.student, scannedStudent);
                             Toast.makeText(getContext(), scannedStudent.firstName + " " + scannedStudent.lastName, Toast.LENGTH_SHORT).show();
                             attendence.state = Attendence.getNextAttendence(attendence.state);
 
                             schoolClassesViewModel.UpdateStudentAttendence(attendence);
                         } catch (Exception e) {
-                            e.printStackTrace();
+                            Toast.makeText(getContext(), "an error occured", Toast.LENGTH_SHORT).show();
                         }
 
 
@@ -242,10 +250,10 @@ public class SchoolClassAttendenceFragment extends Fragment {
                 scanningMesage.setVisibility(View.GONE);
                 TextView studentName = studentNode.findViewById(R.id.studentName);
                 TextView student_id = studentNode.findViewById(R.id.studentId);
-                TextView  time = studentNode.findViewById(R.id.enter_time);
+                TextView time = studentNode.findViewById(R.id.enter_time);
 
-                studentName.setText(scannedStudent.firstName +" "+ scannedStudent.lastName);
-                student_id.setText(scannedStudent.id+"");
+                studentName.setText(scannedStudent.firstName + " " + scannedStudent.lastName);
+                student_id.setText(scannedStudent.id + "");
                 time.setText("Now");
                 break;
             case scanning:

@@ -49,13 +49,13 @@ public interface PlanningDao {
     Attendence getAttendenceOf(int id);
 
     @Query("select distinct m.name as moduleName,m.id as moduleId  from module m , attendence a where a.module_id = m.id and a.student_id =:student_id ")
-    List<ModuleReportNode> getModulesOfStudentwithid(int student_id);
+    List<ModuleReportNode> getModulesOfStudentwithid(String student_id);
 
     @Transaction
     @Query("select   sc.school_classtype as school_classtype  ,(select count(*) from attendence at where a.student_id  = :student and at.id = a.id and state = 1 and at.module_id = :module) as presenceCount " +
             ",(select count(*) from attendence att where a.student_id  = :student  and att.id = a.id and state = 2 and att.module_id =:module) as absenceCount , sc.start_time , sc.end_time " +
             "from schoolclass sc , attendence a ,module m where m.id = sc.module_id and a.student_id = :student  and a.schoolClass_id = sc.id and a.module_id = :module ")
-    List<AttendenceReportNode> getReportsOf(int student, int module);
+    List<AttendenceReportNode> getReportsOf(String student, int module);
 
 
 }

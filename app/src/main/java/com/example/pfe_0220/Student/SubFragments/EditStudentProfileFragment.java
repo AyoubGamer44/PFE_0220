@@ -155,7 +155,7 @@ public class EditStudentProfileFragment extends Fragment {
                 studentViewModel.newStudent.lastName = lastName.getText().toString();
                 studentViewModel.newStudent.adress = adress.getText().toString();
 
-                studentViewModel.newStudent.id = Integer.parseInt(student_id.getText().toString());
+                studentViewModel.newStudent.id = student_id.getText().toString();
                 studentViewModel.newStudent.email = email.getText().toString();
                 studentViewModel.newStudent.phone_number = phone.getText().toString();
                 studentViewModel.newStudent.school_group = groupPicker.getValue();
@@ -163,7 +163,7 @@ public class EditStudentProfileFragment extends Fragment {
                 studentViewModel.InsertStudent(studentViewModel.newStudent);
 
 new AlertDialog.Builder(getContext()).setMessage(studentViewModel.newStudent.school_group+" section"+groupPicker.getValue()).create().show();
-             //   ((MainActivity) getActivity()).ShowFragment(new StudentFragment(), "Student fragment");
+         ((MainActivity) getActivity()).ShowFragment(new StudentFragment(), "Student fragment");
             }
         });
 

@@ -108,7 +108,7 @@ public class PlanningRepository {
             ) {
                 Attendence attendence = new Attendence();
                 attendence.schoolClass_id = lastInsertedSchoolClassId;
-                attendence.student_id = t.id;
+                attendence.student_id = t.id+"";
                 attendence.presenceType = Attendence.TEACHER;
                 attendence.state = Attendence.PENDING;
                 attendence.enterTime = Calendar.getInstance();

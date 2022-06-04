@@ -31,7 +31,7 @@ public class StudentRepository {
         planningDao = data.planningDao();
     }
 
-    public void getReportsof(int student_id) throws Exception{
+    public void getReportsof(String student_id) throws Exception{
         selected_student_report = new  getReportsOfStudent(planningDao).execute(student_id).get();
     }
 
@@ -40,7 +40,7 @@ allStudent = new GetAllStudent(studentDao).execute().get();
 }
 
 
-public Student getStudentwithId(int id)throws  Exception{
+public Student getStudentwithId(String id)throws  Exception{
 return new GetStudent_BY_ID(studentDao).execute(id).get();
 }
 
@@ -121,7 +121,7 @@ return new GetStudent_BY_ID(studentDao).execute(id).get();
     }
 
 
-    static class GetStudent_BY_ID extends AsyncTask<Integer, Void,Student> {
+    static class GetStudent_BY_ID extends AsyncTask<String, Void,Student> {
 
         StudentDao dao;
 
@@ -130,20 +130,20 @@ return new GetStudent_BY_ID(studentDao).execute(id).get();
         }
 
         @Override
-        protected Student doInBackground(Integer... integers) {
+        protected Student doInBackground(String... integers) {
             return    dao.getStudentwithId(integers[0]);
         }
     }
 
 
-    class getReportsOfStudent extends AsyncTask<Integer,Void, MutableLiveData<ArrayList<ModuleReportNode>>>{
+    class getReportsOfStudent extends AsyncTask<String,Void, MutableLiveData<ArrayList<ModuleReportNode>>>{
         public getReportsOfStudent(PlanningDao dao) {
             this.dao = dao;
         }
 
         PlanningDao dao;
         @Override
-        protected MutableLiveData<ArrayList<ModuleReportNode>> doInBackground(Integer... ids) {
+        protected MutableLiveData<ArrayList<ModuleReportNode>> doInBackground(String... ids) {
             List<ModuleReportNode> modules ;
            modules = dao.getModulesOfStudentwithid(ids[0]);
 

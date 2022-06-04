@@ -25,12 +25,19 @@ import java.util.List;
 
 public class SchoolClassFragment extends Fragment implements SchoolClassesAdapter.ItemClickListener {
 
+    static int ALL = 0;
+    static int COURS = 1;
+    static int TD = 2;
+    static int TP = 3;
+    static int EXAMS = 4;
 
     RecyclerView schoolClassesHolder;
     SchoolClassesAdapter schoolClassesAdapter;
     RecyclerView.LayoutManager mlayoutManager;
     PlanningViewModel planningViewModel;
-SchoolClassesViewModel schoolClassesViewModel;
+    SchoolClassesViewModel schoolClassesViewModel;
+
+    int selectedSchoolType;
 
     @Nullable
     @Override
@@ -38,6 +45,9 @@ SchoolClassesViewModel schoolClassesViewModel;
         return inflater.inflate(R.layout.fragment_school_class, container, false);
     }
 
+    public SchoolClassFragment(int position) {
+        selectedSchoolType = position;
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -57,7 +67,8 @@ SchoolClassesViewModel schoolClassesViewModel;
         planningViewModel.planningRepository.plannedSchoolClasses.observe(getViewLifecycleOwner(), new Observer<List<SchoolClassNode>>() {
             @Override
             public void onChanged(List<SchoolClassNode> schoolClassNodes) {
-                schoolClassesAdapter.UpdateClassesList((ArrayList<SchoolClassNode>) schoolClassNodes);
+
+                schoolClassesAdapter.UpdateClassesList(getSchoolClassesNodeWith((ArrayList<SchoolClassNode>) schoolClassNodes));
             }
         });
 
@@ -72,5 +83,19 @@ SchoolClassesViewModel schoolClassesViewModel;
             e.printStackTrace();
         }
         ((MainActivity) getActivity()).ShowFragment(new SchoolClassAttendenceFragment(), " classes attendences ");
+    }
+
+
+    public ArrayList<SchoolClassNode> getSchoolClassesNodeWith(ArrayList<SchoolClassNode> found) {
+        if(selectedSchoolType > 0){
+        ArrayList<SchoolClassNode> s = new ArrayList<>();
+        for (SchoolClassNode n : found
+        ) {
+            if (n.school_classtype + 1 == selectedSchoolType) {
+                s.add(n);
+            }
+        }
+        return s;}
+        else      return found;
     }
 }

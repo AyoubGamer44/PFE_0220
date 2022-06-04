@@ -1,5 +1,6 @@
 package com.example.pfe_0220.Student.Model;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
@@ -10,9 +11,9 @@ import java.util.Calendar;
 
 @Entity
 public class Student extends Person {
-
+@NonNull
    @PrimaryKey(autoGenerate = false)
-    public int id;
+    public String id;
     public int section;
     public int school_group;
     public int level;
@@ -20,7 +21,7 @@ public class Student extends Person {
     public  int speciality_id;
     public Calendar birthDate;
 
-    public Student(String firstName, String lastName, int id, int section, int school_group, int level, int department_id, int speciality_id, Calendar birthDate) {
+    public Student(String firstName, String lastName, String id, int section, int school_group, int level, int department_id, int speciality_id, Calendar birthDate) {
         super(firstName, lastName);
         this.id = id;
         this.section = section;

@@ -92,9 +92,9 @@ public static  int LAST_GROUP = 6;
 
     public static ArrayList<String> getSchoolClassType(){
         ArrayList<String> schoolClassesType = new ArrayList<>();
-        schoolClassesType.add("TP");
-        schoolClassesType.add("TD");
         schoolClassesType.add("Cours");
+        schoolClassesType.add("TD");
+        schoolClassesType.add("TP");
         schoolClassesType.add("Examen");
         return schoolClassesType;
     }

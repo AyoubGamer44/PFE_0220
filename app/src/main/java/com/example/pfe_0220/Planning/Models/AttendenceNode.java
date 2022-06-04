@@ -16,12 +16,12 @@ public class AttendenceNode {
     public int id;
     public String first_name;
     public String last_name;
-    public int student_id;
+    public String student_id;
     public Calendar enterTime;
     public int state;
     public int presenceType;
 
-    public AttendenceNode(int id, String first_name,String last_name, int student_id, Calendar enterTime, int state, int presenceType) {
+    public AttendenceNode(int id, String first_name,String last_name, String student_id, Calendar enterTime, int state, int presenceType) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -34,10 +34,10 @@ public class AttendenceNode {
 
 
 
-    public static int getAttendenceof(int student_id, ArrayList<AttendenceNode> nodes){
+    public static int getAttendenceof(String student_id, ArrayList<AttendenceNode> nodes){
         for (AttendenceNode node: nodes
              ) {
-            if (node.student_id == student_id) {
+            if (node.student_id.equals(student_id) ) {
                 return node.id;
             }
         }

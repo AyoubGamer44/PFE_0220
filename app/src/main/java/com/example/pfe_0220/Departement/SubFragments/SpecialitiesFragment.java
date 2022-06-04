@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -20,7 +19,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pfe_0220.CommunModels.DropDownListAdapter;
 import com.example.pfe_0220.Departement.Adapters.SpecialitiesListAdapter;
 import com.example.pfe_0220.Departement.DepartementViewModel;
 import com.example.pfe_0220.Departement.Models.Departement;
@@ -39,7 +37,7 @@ public class SpecialitiesFragment extends Fragment implements SpecialitiesListAd
     RecyclerView specialitiesListHolder;
     RecyclerView.LayoutManager layoutManager;
 
-DepartementViewModel departementViewModel;
+    DepartementViewModel departementViewModel;
 
 
     FloatingActionButton addSpeciality;
@@ -49,7 +47,7 @@ DepartementViewModel departementViewModel;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_speciailties,container,false);
+        return inflater.inflate(R.layout.fragment_speciailties, container, false);
     }
 
     @Override
@@ -60,7 +58,7 @@ DepartementViewModel departementViewModel;
 
         specialitiesListHolder = view.findViewById(R.id.specialitiesListHolder);
         specialitiesListAdapter = new SpecialitiesListAdapter();
-        layoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         specialitiesListHolder.setLayoutManager(layoutManager);
         specialitiesListHolder.setAdapter(specialitiesListAdapter);
 
@@ -75,37 +73,24 @@ DepartementViewModel departementViewModel;
         });
 
 
+        departementViewModel.departementRepository.savedSpecialities.observe(getViewLifecycleOwner(), new Observer<List<Speciality>>() {
+            @Override
+            public void onChanged(List<Speciality> specialities) {
+                specialitiesListAdapter.UpdateSpecialitiesList((ArrayList<Speciality>) specialities);
 
-departementViewModel.departementRepository.savedSpecialities.observe(getViewLifecycleOwner(), new Observer<List<Speciality>>() {
-    @Override
-    public void onChanged(List<Speciality> specialities) {
-        specialitiesListAdapter.UpdateSpecialitiesList((ArrayList<Speciality>) specialities);
-
-    }
-});
-
-
-
-
-
-
-
-
-
+            }
+        });
 
 
         departementViewModel.departementRepository.savedDepartements.observe(getViewLifecycleOwner(), new Observer<List<Departement>>() {
             @Override
             public void onChanged(List<Departement> departements) {
 
-              departementList = (ArrayList<Departement>) departements;
+                departementList = (ArrayList<Departement>) departements;
 
 
             }
         });
-
-
-
 
 
     }
@@ -115,8 +100,8 @@ departementViewModel.departementRepository.savedSpecialities.observe(getViewLife
 
         departementViewModel.selected_speciality = specialitiesListAdapter.specialities.get(position).id;
         try {
-            departementViewModel.departementRepository.getModuleof( specialitiesListAdapter.specialities.get(position).id);
-            ((MainActivity)getActivity()).ShowFragment(new ModulesFragment(),"modules of "+specialitiesListAdapter.specialities.get(position).name);
+            departementViewModel.departementRepository.getModuleof(specialitiesListAdapter.specialities.get(position).id);
+            ((MainActivity) getActivity()).ShowFragment(new ModulesFragment(), "modules of " + specialitiesListAdapter.specialities.get(position).name);
         } catch (Exception e) {
             Toast.makeText(getContext(), "some error when loading modules occured", Toast.LENGTH_SHORT).show();
         }
@@ -125,29 +110,28 @@ departementViewModel.departementRepository.savedSpecialities.observe(getViewLife
     }
 
 
-
     public void ShowAddSpecialityDialog() {
 
 
-            Dialog addDepartementDialog = new Dialog(getContext());
-            addDepartementDialog.setContentView(R.layout.dialog_add_speciality);
+        Dialog addDepartementDialog = new Dialog(getContext());
+        addDepartementDialog.setContentView(R.layout.dialog_add_speciality);
         addDepartementDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            EditText speciality_name_input;
-            Button save, cancel;
+        EditText speciality_name_input;
+        Button save, cancel;
         AutoCompleteTextView departemrnts_autoCompleteTextView;
         speciality_name_input = addDepartementDialog.findViewById(R.id.speciality_input);
-            save = addDepartementDialog.findViewById(R.id.speciality_save_btn);
-            cancel = addDepartementDialog.findViewById(R.id.speciality_canel_btn);
+        save = addDepartementDialog.findViewById(R.id.speciality_save_btn);
+        cancel = addDepartementDialog.findViewById(R.id.speciality_canel_btn);
 
-        departemrnts_autoCompleteTextView = addDepartementDialog.findViewById(R.id.depratement_drop_down_list);
-        adapterItems = new ArrayAdapter<String>(getContext(),R.layout.drop_down_list_item,getDepartementNames());
-        departemrnts_autoCompleteTextView.setAdapter(adapterItems);
+
+        adapterItems = new ArrayAdapter<String>(getContext(), R.layout.drop_down_list_item, getDepartementNames());
+     
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Speciality s = new Speciality(speciality_name_input.getText().toString(),departementViewModel.selected_departement);
+                Speciality s = new Speciality(speciality_name_input.getText().toString(), departementViewModel.selected_departement);
                 try {
                     departementViewModel.InsertSpeciality(s);
                     Toast.makeText(getContext(), "saved successfull", Toast.LENGTH_SHORT).show();
@@ -169,22 +153,20 @@ departementViewModel.departementRepository.savedSpecialities.observe(getViewLife
         });
 
 
-            addDepartementDialog.create();
-            addDepartementDialog.show();
+        addDepartementDialog.create();
+        addDepartementDialog.show();
 
     }
 
 
-    public ArrayList<String> getDepartementNames(){
+    public ArrayList<String> getDepartementNames() {
         ArrayList<String> stringList = new ArrayList<>();
-        for (Departement d:
+        for (Departement d :
                 departementList) {
             stringList.add(d.name);
         }
-        return  stringList;
+        return stringList;
     }
-
-
 
 
 }

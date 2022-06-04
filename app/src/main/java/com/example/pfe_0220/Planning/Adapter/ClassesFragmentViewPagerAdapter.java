@@ -21,7 +21,7 @@ public class ClassesFragmentViewPagerAdapter extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        return new SchoolClassFragment();
+        return new SchoolClassFragment(position);
     }
 
     @Override

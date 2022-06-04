@@ -1,9 +1,11 @@
 package com.example.pfe_0220.Planning;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,10 +19,11 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.pfe_0220.MainActivity;
 import com.example.pfe_0220.Planning.Adapter.ClassesFragmentViewPagerAdapter;
+import com.example.pfe_0220.Planning.Adapter.SchoolClassesAdapter;
 import com.example.pfe_0220.Planning.Adapter.SchoolYearDaysAdapter;
+import com.example.pfe_0220.Planning.Models.DayNode;
 import com.example.pfe_0220.Planning.SubFragment.AddPlanificationFragment;
 import com.example.pfe_0220.R;
-import com.example.pfe_0220.databinding.StepperAddPlanificationFragmentsHolderBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
@@ -38,7 +41,7 @@ public class PlanningFragment extends Fragment {
     ClassesFragmentViewPagerAdapter schoolClassesAdapter;
 
     FloatingActionButton addnewPlanningBtn;
-
+    int prevDay = -1;
 
     /**
      * this is autogenrated method to create the view responsible of rendering the UI
@@ -82,6 +85,37 @@ public class PlanningFragment extends Fragment {
         });
 
 
+        school_year.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                        Calendar day = Calendar.getInstance();
+                        day.set(year, month, dayOfMonth);
+                        vm.current_school_day = day;
+                        vm.JumpToDate(day);
+
+
+                    }
+                }, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+
+        schoolYearDaysAdapter.setClickListener(new SchoolClassesAdapter.ItemClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                if (prevDay != -1) {
+                    schoolYearDaysAdapter.days.get(prevDay).selected = false;
+                    schoolYearDaysAdapter.notifyItemChanged(prevDay);
+                }
+                schoolYearDaysAdapter.days.get(position).selected = true;
+                schoolYearDaysAdapter.notifyItemChanged(position);
+                prevDay = position;
+            }
+        });
     }
 
     private void LinkViews(View view) {
@@ -109,15 +143,20 @@ public class PlanningFragment extends Fragment {
     }
 
     private void UpdateDaysScroolBar(ArrayList<Calendar> days) {
+        ArrayList<DayNode> dayNodes = new ArrayList<>();
 
-
-        schoolYearDaysAdapter.UpdateSchoolYearAdapter(days);
+        for (Calendar d :
+                days) {
+            dayNodes.add(new DayNode(d));
+        }
+        schoolYearDaysAdapter.UpdateSchoolYearAdapter(dayNodes);
 
         int current_year = vm.current_school_day.get(Calendar.YEAR);
 
         int next_year = current_year + 1;
 
         school_year.setText(current_year + " - " + next_year);
+        school_year_days_holder.scrollToPosition(schoolYearDaysAdapter.getItemCount() / 3);
     }
 
     private void DaysScroolBarConfiguration(View view) {
